@@ -15,7 +15,7 @@
         <!--<a v-link="{path:'/seller'}">商家</a>-->
       </div>
     </div>
-    <router-view></router-view>
+    <router-view :seller="seller"></router-view>
     <!--<div class="content">-->
         <!--I am content-->
     <!--</div>-->
@@ -52,15 +52,15 @@
     .tab{
       display:flex;
       width: 100%;
-      height:40px;
-      line-height :40px;
+      height:40/@num;
+      line-height :40/@num;
       .border-1px(rgba(7,17,27,0.1));
       .tab-item {
         flex: 1;
         text-align: center;
         & > a{
           display :block;
-          font-size :14px;
+          font-size :14/@num;
           color: rgb(77, 85, 93);
           & .active{
           color: rgb(240, 20, 20)

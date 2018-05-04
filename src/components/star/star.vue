@@ -1,5 +1,6 @@
 <template>
   <div class="star" :class="starType">
+    <!--eslint-disable-next-line-->
     <span v-for="itemClass in itemClasses" :class="itemClass" class="star-item" ></span>
   </div>
 </template>
