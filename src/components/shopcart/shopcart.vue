@@ -17,6 +17,12 @@
         </div>
       </div>
     </div>
+    <div class="ball-container">
+      <!--eslint-disable-next-line-->
+      <div v-for="ball in balls" v-show="ball.show">
+        <div class="inner"></div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -27,10 +33,10 @@
         type: Array,
         default() {
           return [
-            {
-              price: 10,
-              count: 1
-            }
+            // {
+            //   price: 10,
+            //   count: 1
+            // }
           ];
         }
       },
@@ -42,6 +48,27 @@
         type: Number,
         default: 0
       }
+    },
+    data() {
+      return {
+        balls: [
+          {
+            show: false
+          },
+          {
+            show: false
+          },
+          {
+            show: false
+          },
+          {
+            show: false
+          },
+          {
+            show: false
+          }
+        ]
+      };
     },
     computed: {
       totalPrice() {
@@ -75,7 +102,11 @@
           return 'enough';
         }
       }
-
+    },
+    methods: {
+      drop(el) {
+        console.log(el);
+      }
     }
   };
 </script>
@@ -182,6 +213,24 @@
           &.enough{
             background: #00b43c;
             color: #fff;
+          }
+        }
+      }
+    }
+    .ball-container{
+      .ball{
+        position: fixed;
+        left: 32/@num;
+        bottom: 22/@num;
+        z-index: 200;
+        &.drop-transition{
+          transition: all .4s;
+          .inner{
+            width: 16/@num;
+            height: 16/@num;
+            border-radius: 50%;
+            background: rgb(0,160,220);
+            transition: all .4s;
           }
         }
       }

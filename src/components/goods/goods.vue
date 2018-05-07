@@ -41,7 +41,7 @@
         </li>
       </ul>
     </div>
-    <shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
+    <shopcart ref="shopcart" :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
   </div>
 </template>
 
@@ -74,6 +74,17 @@
             return i;
           }
         }
+      },
+      selectFoods() {
+        let foods = [];
+        this.goods.forEach((good) => {
+          good.foods.forEach((food) => {
+            if (food.count) {
+              foods.push(food);
+            }
+          });
+        });
+        return foods;
       }
     },
     created() {
@@ -85,6 +96,7 @@
           this.$nextTick(() => {
             this._initScroll();
             this._calculateHeight();
+            // this._drop();
           });
         }
       });
@@ -100,9 +112,15 @@
           return;
         }
         let foodList = this.$refs.foodsWrapper.getElementsByClassName('food-list-hook');
-        console.log(index);
+        // console.log(index);
         let el = foodList[index];
         this.foodsScroll.scrollToElement(el, 300);
+      },
+      _drop(target) {
+        // 体验优化,异步执行下落动画
+        this.$nextTick(() => {
+          this.$refs.shopcart.drop(target);
+        });
       },
       _initScroll() {
         this.menuScroll = new BScroll(this.$refs.menuWrapper, {
